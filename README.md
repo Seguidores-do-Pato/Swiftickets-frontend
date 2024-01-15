@@ -21,12 +21,6 @@ Clone o projeto
   git clone https://github.com/Seguidores-do-Pato/Swiftickets-frontend.git
 ```
 
-Entre no diretório do projeto
-
-```bash
-  cd swiftickets
-```
-
 Instale as dependências
 
 ```bash
