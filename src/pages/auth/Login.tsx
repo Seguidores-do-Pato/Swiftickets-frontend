@@ -16,16 +16,17 @@ import {
     InputRightElement,
     AbsoluteCenter,
     ButtonGroup,
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
 } from "@chakra-ui/react";
 import { FaEnvelope, FaFacebook, FaGoogle, FaLock, FaSignInAlt, FaArrowLeft } from "react-icons/fa";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useAuth } from "../../contexts/Auth";
 import { useNavigate } from "react-router-dom";
-import Logo from '../../assets/Logo.png';
 import Banner from '../../assets/loginImgBanner.jpg'
-import '../../assets/Logo.d.ts'
 import '../../assets/loginImgBanner.d.ts'
-import { url } from "inspector";
 
 
 const Login = () => {
@@ -50,7 +51,7 @@ const Login = () => {
         Login(email, password);
     }
 
-    function handleClickOnDoNothingButton(){
+    function handleClickOnDoNothingButton() {
         //this function has a big name because it`s cool :)
         alert("This button is in ninja training for the ancient art of doing absolutely nothing. Stay tuned for its grand debut as the ultimate master of stillness! 😄")
     }
@@ -66,8 +67,8 @@ const Login = () => {
                         width: '50%',
                         height: '100vh',
                     }}
+                    py={5}
                 >
-                    <Image src={Logo} alt="logo" ml={20} onClick={()=>navigate("/")}/>
                 </Box>
                 <Box w="25%" mx={40} pl={10}>
                     <Center flex={1} flexDirection={"column"} alignItems={"start"}>
@@ -109,6 +110,19 @@ const Login = () => {
                                     Esqueceu a senha?
                                 </Button>
                             </Box>
+                            {!error ? null :
+                                <Alert
+                                    status='error'
+                                    flexDirection='column'
+                                    alignItems='center'
+                                    justifyContent='center'
+                                    textAlign='center'
+                                >
+                                    <AlertIcon />
+                                    <AlertTitle>Email ou Senha inválido!</AlertTitle>
+                                    <AlertDescription>Por favor, tente novamente.</AlertDescription>
+                                </Alert>
+                            }
                         </FormControl>
                     </Center>
                     <Box position='relative' p={5} mb={4}>
