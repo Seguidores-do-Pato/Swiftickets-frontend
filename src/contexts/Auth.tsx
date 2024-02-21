@@ -2,12 +2,13 @@ import React, { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import { BASE_URL, LOGIN_URL, REFRESH_URL } from '../constants/urls'
+import { BASE_URL, LOGIN_URL, REFRESH_URL, REGISTER_URL } from '../constants/urls'
 
 interface AuthContextData {
     user?: object | null;
     Login: (email: string, password: string) => Promise<void>
     Logout: () => Promise<void>
+    Register: (email:string, password:string) => Promise<void>
     UpdateToken: () => Promise<void>
 }
 
@@ -37,6 +38,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser(jwtDecode(response.data.access));
         localStorage.setItem('authTokens', JSON.stringify(response.data));
         navigate('/');
+    }
+
+    async function Register(email:string, password:string){
+        const response = await axios.post(`${BASE_URL}${REGISTER_URL}`, {
+            email,
+            password,
+        }).then(()=>{
+            navigate("/login");
+        }).catch((error)=>{
+            console.error("error ao registrar:", error);
+        })
     }
 
     function isValidToken(tokens: string){
@@ -72,7 +84,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
     }
     return (
-        <AuthContext.Provider value={{ user, Login, Logout, UpdateToken }}>
+        <AuthContext.Provider value={{ user, Login, Logout, UpdateToken, Register }}>
             {children}
         </AuthContext.Provider>
     )

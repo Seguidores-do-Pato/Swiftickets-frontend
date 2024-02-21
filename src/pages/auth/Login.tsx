@@ -6,8 +6,6 @@ import {
     Divider,
     Flex,
     FormControl,
-    FormErrorMessage,
-    Image,
     Text,
     Heading,
     Input,
@@ -25,6 +23,8 @@ import { FaEnvelope, FaFacebook, FaGoogle, FaLock, FaSignInAlt, FaArrowLeft } fr
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useAuth } from "../../contexts/Auth";
 import { useNavigate } from "react-router-dom";
+import Logo from '../../assets/Logo.png'
+import '../../assets/Logo.d.ts'
 import Banner from '../../assets/loginImgBanner.jpg'
 import '../../assets/loginImgBanner.d.ts'
 
@@ -52,7 +52,7 @@ const Login = () => {
     }
 
     function handleClickOnDoNothingButton() {
-        //this function has a big name because it`s cool :)
+        //this function has a big alert because it`s cool :)
         alert("This button is in ninja training for the ancient art of doing absolutely nothing. Stay tuned for its grand debut as the ultimate master of stillness! 😄")
     }
 
@@ -69,6 +69,7 @@ const Login = () => {
                     }}
                     py={5}
                 >
+                    <img src={Logo} alt="logo" style={{ mixBlendMode: "color-burn", paddingLeft: 16 }} />
                 </Box>
                 <Box w="25%" mx={40} pl={10}>
                     <Center flex={1} flexDirection={"column"} alignItems={"start"}>
@@ -88,7 +89,7 @@ const Login = () => {
                                 </InputLeftElement>
                                 <Input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                             </InputGroup>
-                            <InputGroup mb={3}>
+                            <InputGroup>
                                 <InputLeftElement>
                                     <FaLock />
                                 </InputLeftElement>
@@ -104,11 +105,19 @@ const Login = () => {
                                     </span>
                                 </InputRightElement>
                             </InputGroup>
-                            <Button colorScheme="teal" width="100%" leftIcon={<FaSignInAlt />} pr={5} mb={2} onClick={handleLogin}>Entrar</Button>
-                            <Box style={{ display: "flex", justifyContent: "end", marginBottom: "4%" }}>
+                            <Box style={{ display: "flex", justifyContent: "end", marginBottom: "2%" }}>
                                 <Button size="sm" variant='link' colorScheme="black" onClick={() => navigate("/")}>
                                     Esqueceu a senha?
                                 </Button>
+                            </Box>
+                            <Button colorScheme="teal" width="100%" leftIcon={<FaSignInAlt />} pr={5} mb={2} onClick={handleLogin}>Entrar</Button>
+                            <Box style={{ display: "flex", justifyContent: "end"}}>
+                                <Text fontSize={"small"} as={'b'}>
+                                    Não tem conta?
+                                    <Button size="small" variant='link' colorScheme="teal" onClick={() => navigate("/register")} ml={1}>
+                                        Registre-se
+                                    </Button>
+                                </Text>
                             </Box>
                             {!error ? null :
                                 <Alert

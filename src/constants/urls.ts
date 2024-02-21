@@ -7,4 +7,5 @@ const SwifticketsBaseUrl = "/api/swiftickets"
 
 export const LOGIN_URL = `${AuthBaseUrl}/login/`;
 export const REFRESH_URL = `${AuthBaseUrl}/refresh/`;
+export const REGISTER_URL = `${AuthBaseUrl}/register/`
 export const SWIFTICKETS_URL = `${SwifticketsBaseUrl}/`
